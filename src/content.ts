@@ -6,7 +6,7 @@ export const event = {
   groom: { sr: 'Дејан', en: 'Dejan' },
   bride: { sr: 'Милица', en: 'Milica' },
   groomFull: 'Dejan Bajić',
-  son: 'Vukašin',
+  son: { sr: 'Вукашин', en: 'Vukašin' },
   date: {
     sr: '13. март 2027',
     en: '13 March 2027',
@@ -54,7 +54,8 @@ export const rsvp = {
 export type LocaleCopy = {
   pageTitle: string
   heroSubtitle: string
-  heroNote: string
+  coupleJoin: string
+  heroBirthday: string
   saveCalendar: string
   scrollHint: string
   inviteTitle: string
@@ -80,8 +81,9 @@ export type LocaleCopy = {
 export const copy: Record<Lang, LocaleCopy> = {
   sr: {
     pageTitle: 'Милица & Дејан | Позивница',
-    heroSubtitle: 'вјенчају се!',
-    heroNote: 'Истог дана славимо и рођендан нашег сина Вукашина.',
+    heroSubtitle: 'вјенчају се',
+    coupleJoin: 'и',
+    heroBirthday: 'слави рођендан',
     saveCalendar: 'Сачувај у календар',
     scrollHint: 'Скролуј',
     inviteTitle: 'Позивамо',
@@ -111,8 +113,9 @@ export const copy: Record<Lang, LocaleCopy> = {
   },
   en: {
     pageTitle: 'Milica & Dejan | Invitation',
-    heroSubtitle: 'are getting married!',
-    heroNote: "The same day we celebrate our son Vukašin's birthday.",
+    heroSubtitle: 'are getting married',
+    coupleJoin: 'and',
+    heroBirthday: 'is celebrating a birthday',
     saveCalendar: 'Save the date',
     scrollHint: 'Scroll',
     inviteTitle: 'You are invited',

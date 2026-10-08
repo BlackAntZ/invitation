@@ -37,11 +37,14 @@ function App() {
           <GlassPanel className="date-pill">
             <time dateTime={event.startsAt}>{dateLabel}</time>
           </GlassPanel>
+          <p className="hero__lead">{t.heroSubtitle}</p>
           <h1 id="hero-title" className="hero__names">
-            {event.bride[lang]} <span className="hero__amp">&</span> {event.groom[lang]}
+            {event.bride[lang]} <span className="hero__amp">{t.coupleJoin}</span> {event.groom[lang]}
           </h1>
-          <h2 className="hero__subtitle">{t.heroSubtitle}</h2>
-          <p className="hero__note">{t.heroNote}</p>
+          <div className="hero__birthday">
+            <p className="hero__names">{event.son[lang]}</p>
+            <p className="hero__lead">{t.heroBirthday}</p>
+          </div>
 
           <GlassPanel className="hero__actions">
             <button type="button" className="btn btn--primary" onClick={() => downloadIcsFile(lang)}>
