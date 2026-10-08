@@ -299,7 +299,16 @@ html[lang='sr'] .hero__names {
   flex-direction: column;
   align-items: center;
   gap: 0.15rem;
-  margin: 1.15rem 0 1.35rem;
+  margin: 1.15rem 0 0.35rem;
+}
+
+.monogram {
+  display: block;
+  width: min(240px, 62vw);
+  height: auto;
+  margin: 0.15rem auto 0.15rem;
+  pointer-events: none;
+  user-select: none;
 }
 
 .hero__scroll {
@@ -536,6 +545,10 @@ html[lang='sr'] .hero__names {
 
   .hero__names {
     font-size: clamp(5.75rem, 6.4vw, 7.75rem);
+  }
+
+  .monogram {
+    width: 280px;
   }
 
   .hero__lead {

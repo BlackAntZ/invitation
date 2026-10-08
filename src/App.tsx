@@ -9,6 +9,8 @@ import { downloadIcsFile } from './utils/calendar'
 import { getGuestFromUrl } from './utils/guestName'
 import { mapsUrl } from './utils/maps'
 import sprig from './assets/sprig.webp'
+import monogramEn from './assets/monogram-en.webp'
+import monogramSr from './assets/monogram-sr.webp'
 import './styles.css'
 
 function App() {
@@ -45,6 +47,11 @@ function App() {
             <p className="hero__names">{event.son[lang]}</p>
             <p className="hero__lead">{t.heroBirthday}</p>
           </div>
+          <img
+            className="monogram"
+            src={lang === 'sr' ? monogramSr : monogramEn}
+            alt=""
+          />
 
           <button type="button" className="btn btn--primary" onClick={() => downloadIcsFile(lang)}>
             <CalendarIcon />
