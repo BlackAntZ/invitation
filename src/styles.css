@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Great+Vibes&display=swap');
 
 :root {
   --font-script: 'Great Vibes', cursive;
-  --font-script-cyr: 'Marck Script', cursive;
+  --font-script-cyr: 'Cormorant Garamond', 'Times New Roman', serif;
   --font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --text: #1a2e28;
   --text-soft: rgba(26, 46, 40, 0.72);
@@ -45,8 +45,10 @@ body {
   font-weight: 400;
 }
 
-html[lang='sr'] .script {
+html[lang='sr'] .script,
+html[lang='sr'] .hero__names {
   font-family: var(--font-script-cyr);
+  font-weight: 500;
 }
 
 /* Background */

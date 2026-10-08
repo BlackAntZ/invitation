@@ -3,10 +3,10 @@ export type Lang = 'sr' | 'en'
 export const STORAGE_LANG_KEY = 'wedding-invite-lang'
 
 export const event = {
-  groom: { sr: 'Dejan', en: 'Dejan' },
-  bride: { sr: 'Milica', en: 'Milica' },
+  groom: { sr: 'Дејан', en: 'Dejan' },
+  bride: { sr: 'Милица', en: 'Milica' },
   groomFull: 'Dejan Bajić',
-  son: { sr: 'Vukašin', en: 'Vukašin' },
+  son: { sr: 'Вукашин', en: 'Vukašin' },
   date: {
     sr: '13. март 2027',
     en: '13 March 2027',
@@ -90,7 +90,7 @@ export const copy: Record<Lang, LocaleCopy> = {
   sr: {
     pageTitle: 'Милица & Дејан | Позивница',
     heroSubtitle: 'вјенчају се',
-    coupleJoin: 'i',
+    coupleJoin: 'и',
     heroBirthday: 'слави рођендан',
     saveCalendar: 'Сачувај у календар',
     scrollHint: 'Скролуј',
