@@ -111,7 +111,7 @@ export const copy: Record<Lang, LocaleCopy> = {
     locationTitle: 'Локација',
     mapsLink: 'Google Maps',
     rsvpTitle: 'Потврдите долазак',
-    rsvpBody: 'Молимо да потврдите долазак до 01.03.2026.',
+    rsvpBody: 'Молимо да потврдите долазак до 01.03.2027.',
     footer: 'Милица & Дејан — 13. март 2027',
   },
   en: {
@@ -143,7 +143,7 @@ export const copy: Record<Lang, LocaleCopy> = {
     locationTitle: 'Location',
     mapsLink: 'Google Maps',
     rsvpTitle: 'RSVP',
-    rsvpBody: 'Please confirm your attendance by 1 March 2026.',
+    rsvpBody: 'Please confirm your attendance by 1 March 2027.',
     footer: 'Milica & Dejan — 13 March 2027',
   },
 }
