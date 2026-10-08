@@ -9,11 +9,11 @@ export function buildIcs(lang: Lang, now = new Date()): string {
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Dejan Milica Wedding//EN',
+    'PRODID:-//Milica Dejan Wedding//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     'BEGIN:VEVENT',
-    `UID:${now.getTime()}@dejan-milica-wedding`,
+    `UID:${now.getTime()}@milica-dejan-wedding`,
     `DTSTAMP:${formatIcsUtc(now)}`,
     `DTSTART:${formatIcsUtc(start)}`,
     `DTEND:${formatIcsUtc(end)}`,
@@ -32,7 +32,7 @@ export function downloadIcsFile(lang: Lang): void {
   const url = URL.createObjectURL(blob)
   const anchor = document.createElement('a')
   anchor.href = url
-  anchor.download = 'dejan-milica-wedding.ics'
+  anchor.download = 'milica-dejan-wedding.ics'
   document.body.appendChild(anchor)
   anchor.click()
   anchor.remove()

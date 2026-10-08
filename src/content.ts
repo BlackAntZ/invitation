@@ -6,6 +6,7 @@ export const event = {
   groom: 'Dejan',
   bride: 'Milica',
   groomFull: 'Dejan Bajić',
+  son: 'Vukašin',
   date: {
     sr: '13. mart 2027',
     en: '13 March 2027',
@@ -15,12 +16,12 @@ export const event = {
   /** How long the calendar event lasts after the gathering starts. */
   durationHours: 6,
   icsSummary: {
-    sr: 'Dejan & Milica — vjenčanje',
-    en: 'Dejan & Milica — wedding',
+    sr: 'Milica & Dejan — vjenčanje i Vukašinov rođendan',
+    en: "Milica & Dejan — wedding and Vukašin's birthday",
   },
   icsDescription: {
-    sr: 'Vjenčanje Dejana i Milice',
-    en: "Dejan and Milica's wedding",
+    sr: 'Vjenčanje Milice i Dejana i rođendan njihovog sina Vukašina',
+    en: "Milica and Dejan's wedding, and their son Vukašin's birthday",
   },
   venue: {
     sr: 'Svadbeni salon „Kedar“',
@@ -50,6 +51,7 @@ export const rsvp = {
 export type LocaleCopy = {
   pageTitle: string
   heroSubtitle: string
+  heroNote: string
   saveCalendar: string
   scrollHint: string
   inviteTitle: string
@@ -74,13 +76,14 @@ export type LocaleCopy = {
 
 export const copy: Record<Lang, LocaleCopy> = {
   sr: {
-    pageTitle: 'Dejan & Milica | Pozivnica',
+    pageTitle: 'Milica & Dejan | Pozivnica',
     heroSubtitle: 'vjenčaju se!',
+    heroNote: 'Istog dana slavimo i rođendan našeg sina Vukašina.',
     saveCalendar: 'Sačuvaj u kalendar',
     scrollHint: 'Skroluj',
     inviteTitle: 'Pozivamo',
     inviteBody:
-      'Naš dan želimo proslaviti uz one koje volimo — vaše prisustvo nam puno znači.',
+      'Naš dan želimo proslaviti uz one koje volimo, i uz rođendan našeg sina Vukašina. Vaše prisustvo nam puno znači.',
     inviteGuest: { f: 'Draga', m: 'Dragi', u: '' },
     countdownTitle: 'Do velikog dana',
     countdownDoneTitle: 'Proslava',
@@ -101,16 +104,17 @@ export const copy: Record<Lang, LocaleCopy> = {
     mapsLink: 'Google Maps',
     rsvpTitle: 'Potvrdite dolazak',
     rsvpBody: '',
-    footer: 'Dejan & Milica — 13. mart 2027',
+    footer: 'Milica & Dejan — 13. mart 2027',
   },
   en: {
-    pageTitle: 'Dejan & Milica | Invitation',
+    pageTitle: 'Milica & Dejan | Invitation',
     heroSubtitle: 'are getting married!',
+    heroNote: "The same day we celebrate our son Vukašin's birthday.",
     saveCalendar: 'Save the date',
     scrollHint: 'Scroll',
     inviteTitle: 'You are invited',
     inviteBody:
-      'We want to celebrate our day with the people we love — it would mean the world to have you there.',
+      "We want to celebrate our day with the people we love, and our son Vukašin's birthday. It would mean the world to have you there.",
     inviteGuest: { f: 'Dear', m: 'Dear', u: 'Dear' },
     countdownTitle: 'Counting down',
     countdownDoneTitle: 'The celebration',
@@ -131,6 +135,6 @@ export const copy: Record<Lang, LocaleCopy> = {
     mapsLink: 'Google Maps',
     rsvpTitle: 'RSVP',
     rsvpBody: '',
-    footer: 'Dejan & Milica — 13 March 2027',
+    footer: 'Milica & Dejan — 13 March 2027',
   },
 }

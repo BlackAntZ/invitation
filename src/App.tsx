@@ -37,9 +37,10 @@ function App() {
             <time dateTime={event.startsAt}>{dateLabel}</time>
           </GlassPanel>
           <h1 id="hero-title" className="hero__names">
-            {event.groom} <span className="hero__amp">&</span> {event.bride}
+            {event.bride} <span className="hero__amp">&</span> {event.groom}
           </h1>
           <h2 className="hero__subtitle">{t.heroSubtitle}</h2>
+          <p className="hero__note">{t.heroNote}</p>
 
           <GlassPanel className="hero__actions">
             <button type="button" className="btn btn--primary" onClick={() => downloadIcsFile(lang)}>
