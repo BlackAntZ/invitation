@@ -369,14 +369,14 @@ html[lang='sr'] .hero__names {
 }
 
 .btn--secondary {
-  color: var(--accent-deep);
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: #fff;
+  background: linear-gradient(145deg, var(--accent) 0%, var(--accent-deep) 100%);
+  box-shadow: 0 4px 18px rgba(30, 50, 44, 0.28);
   margin-top: 1.25rem;
 }
 
 .btn--secondary:hover {
-  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 6px 22px rgba(30, 50, 44, 0.36);
 }
 
 /* Invite */
