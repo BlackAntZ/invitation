@@ -59,15 +59,14 @@ function App() {
         </section>
 
         <div className="band">
-        <section id="invite" className="section">
+        <section id="invite" className="section" aria-labelledby="invite-body">
           <GlassPanel className="section__panel section__panel--narrow">
-            <h2 className="section__title script">{t.inviteTitle}</h2>
             {guest.name ? (
               <p className="invite__guest">
                 {guestPrefix ? `${guestPrefix} ${guest.name},` : `${guest.name},`}
               </p>
             ) : null}
-            <p className="invite__body">{t.inviteBody}</p>
+            <p id="invite-body" className="invite__body">{t.inviteBody}</p>
           </GlassPanel>
         </section>
 

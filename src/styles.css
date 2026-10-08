@@ -45,8 +45,7 @@ body {
   font-weight: 400;
 }
 
-html[lang='sr'] .script,
-html[lang='sr'] .hero__names {
+html[lang='sr'] .script {
   font-family: var(--font-script-cyr);
 }
 

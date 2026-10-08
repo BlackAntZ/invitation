@@ -3,10 +3,10 @@ export type Lang = 'sr' | 'en'
 export const STORAGE_LANG_KEY = 'wedding-invite-lang'
 
 export const event = {
-  groom: { sr: 'Дејан', en: 'Dejan' },
-  bride: { sr: 'Милица', en: 'Milica' },
+  groom: { sr: 'Dejan', en: 'Dejan' },
+  bride: { sr: 'Milica', en: 'Milica' },
   groomFull: 'Dejan Bajić',
-  son: { sr: 'Вукашин', en: 'Vukašin' },
+  son: { sr: 'Vukašin', en: 'Vukašin' },
   date: {
     sr: '13. март 2027',
     en: '13 March 2027',
@@ -49,8 +49,14 @@ export const rsvp = {
   enabled: true,
   deadline: { sr: '', en: '' },
   phones: {
-    sr: [{ label: 'Дејан: 066 866 375', href: 'tel:+38766866375' }],
-    en: [{ label: 'Dejan: 066 866 375', href: 'tel:+38766866375' }],
+    sr: [
+      { label: 'Милица: 065 259 655', href: 'tel:+38765259655' },
+      { label: 'Дејан: 066 866 375', href: 'tel:+38766866375' },
+    ],
+    en: [
+      { label: 'Milica: 065 259 655', href: 'tel:+38765259655' },
+      { label: 'Dejan: 066 866 375', href: 'tel:+38766866375' },
+    ],
   },
 }
 
@@ -61,7 +67,6 @@ export type LocaleCopy = {
   heroBirthday: string
   saveCalendar: string
   scrollHint: string
-  inviteTitle: string
   inviteBody: string
   /** Address before the guest name. Empty means the name stands alone. */
   inviteGuest: { f: string; m: string; u: string }
@@ -85,13 +90,12 @@ export const copy: Record<Lang, LocaleCopy> = {
   sr: {
     pageTitle: 'Милица & Дејан | Позивница',
     heroSubtitle: 'вјенчају се',
-    coupleJoin: 'и',
+    coupleJoin: 'i',
     heroBirthday: 'слави рођендан',
     saveCalendar: 'Сачувај у календар',
     scrollHint: 'Скролуј',
-    inviteTitle: 'Позивамо',
     inviteBody:
-      'Наш дан желимо прославити уз оне које волимо, и уз рођендан нашег сина Вукашина. Ваше присуство нам пуно значи.',
+      'Наш дан желимо прославити уз оне које волимо. Ваше присуство нам пуно значи.',
     inviteGuest: { f: 'Драга', m: 'Драги', u: '' },
     countdownTitle: 'До великог дана',
     countdownDoneTitle: 'Прослава',
@@ -121,9 +125,8 @@ export const copy: Record<Lang, LocaleCopy> = {
     heroBirthday: 'is celebrating a birthday',
     saveCalendar: 'Save the date',
     scrollHint: 'Scroll',
-    inviteTitle: 'You are invited',
     inviteBody:
-      "We want to celebrate our day with the people we love, and our son Vukašin's birthday. It would mean the world to have you there.",
+      'We want to celebrate our day with the people we love. Your presence means a lot to us.',
     inviteGuest: { f: 'Dear', m: 'Dear', u: 'Dear' },
     countdownTitle: 'Counting down',
     countdownDoneTitle: 'The celebration',
