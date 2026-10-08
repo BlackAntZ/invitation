@@ -46,12 +46,10 @@ function App() {
             <p className="hero__lead">{t.heroBirthday}</p>
           </div>
 
-          <GlassPanel className="hero__actions">
-            <button type="button" className="btn btn--primary" onClick={() => downloadIcsFile(lang)}>
-              <CalendarIcon />
-              {t.saveCalendar}
-            </button>
-          </GlassPanel>
+          <button type="button" className="btn btn--primary" onClick={() => downloadIcsFile(lang)}>
+            <CalendarIcon />
+            {t.saveCalendar}
+          </button>
 
           <a href="#invite" className="hero__scroll" aria-label={t.scrollHint}>
             <ChevronDown />
