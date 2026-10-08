@@ -63,8 +63,9 @@ html[lang='sr'] .hero__names {
 .bg {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .bg__photo {
@@ -206,6 +207,8 @@ html[lang='sr'] .hero__names {
 
 /* Layout */
 .page {
+  position: relative;
+  z-index: 1;
   max-width: 720px;
   margin: 0 auto;
   padding: 0 1.25rem 4rem;
@@ -382,6 +385,29 @@ html[lang='sr'] .hero__names {
 
 .btn--secondary {
   margin-top: 1.25rem;
+}
+
+/* A live blur resamples the photo every frame. On a phone that sample
+   trails a fast swipe, so the frost stays opaque and still. */
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  .glass,
+  .btn {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .glass {
+    background: linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.86) 0%,
+      rgba(255, 255, 255, 0.74) 42%,
+      rgba(248, 250, 247, 0.8) 100%
+    );
+  }
+
+  .bg__grain {
+    display: none;
+  }
 }
 
 /* Invite */
