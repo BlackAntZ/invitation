@@ -22,9 +22,10 @@ function App() {
     document.title = t.pageTitle
   }, [t.pageTitle])
 
-  const venueLabel = lang === 'sr' ? event.venue.sr : event.venue.en
-  const dateLabel = lang === 'sr' ? event.date.sr : event.date.en
-  const regionLabel = lang === 'sr' ? event.region.sr : event.region.en
+  const venueLabel = event.venue[lang]
+  const dateLabel = event.date[lang]
+  const regionLabel = event.region[lang]
+  const cityLabel = event.city[lang]
 
   return (
     <>
@@ -37,7 +38,7 @@ function App() {
             <time dateTime={event.startsAt}>{dateLabel}</time>
           </GlassPanel>
           <h1 id="hero-title" className="hero__names">
-            {event.bride} <span className="hero__amp">&</span> {event.groom}
+            {event.bride[lang]} <span className="hero__amp">&</span> {event.groom[lang]}
           </h1>
           <h2 className="hero__subtitle">{t.heroSubtitle}</h2>
           <p className="hero__note">{t.heroNote}</p>
@@ -122,7 +123,7 @@ function App() {
           <GlassPanel className="section__panel location">
             <p className="location__venue">{venueLabel}</p>
             <p className="location__city">
-              {event.city}
+              {cityLabel}
               <br />
               {regionLabel}
             </p>

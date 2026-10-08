@@ -4,7 +4,7 @@ import { event, type Lang } from '../content'
 export function buildIcs(lang: Lang, now = new Date()): string {
   const start = new Date(event.startsAt)
   const end = new Date(start.getTime() + event.durationHours * 60 * 60 * 1000)
-  const location = `${event.venue[lang]}, ${event.city}, ${event.region[lang]}`
+  const location = `${event.venue[lang]}, ${event.city[lang]}, ${event.region[lang]}`
 
   const lines = [
     'BEGIN:VCALENDAR',

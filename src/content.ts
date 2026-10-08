@@ -3,12 +3,12 @@ export type Lang = 'sr' | 'en'
 export const STORAGE_LANG_KEY = 'wedding-invite-lang'
 
 export const event = {
-  groom: 'Dejan',
-  bride: 'Milica',
+  groom: { sr: 'Дејан', en: 'Dejan' },
+  bride: { sr: 'Милица', en: 'Milica' },
   groomFull: 'Dejan Bajić',
   son: 'Vukašin',
   date: {
-    sr: '13. mart 2027',
+    sr: '13. март 2027',
     en: '13 March 2027',
   },
   /** Europe/Sarajevo — guest gathering. 13 March 2027 is still CET (UTC+1). */
@@ -16,20 +16,23 @@ export const event = {
   /** How long the calendar event lasts after the gathering starts. */
   durationHours: 6,
   icsSummary: {
-    sr: 'Milica & Dejan — vjenčanje i Vukašinov rođendan',
+    sr: 'Милица & Дејан — вјенчање и Вукашинов рођендан',
     en: "Milica & Dejan — wedding and Vukašin's birthday",
   },
   icsDescription: {
-    sr: 'Vjenčanje Milice i Dejana i rođendan njihovog sina Vukašina',
+    sr: 'Вјенчање Милице и Дејана и рођендан њиховог сина Вукашина',
     en: "Milica and Dejan's wedding, and their son Vukašin's birthday",
   },
   venue: {
-    sr: 'Svadbeni salon „Kedar“',
+    sr: 'Свадбени салон „Кедар“',
     en: 'Wedding hall “Kedar”',
   },
-  city: 'Mrkonjić Grad',
+  city: {
+    sr: 'Мркоњић Град',
+    en: 'Mrkonjić Grad',
+  },
   region: {
-    sr: 'Bosna i Hercegovina',
+    sr: 'Босна и Херцеговина',
     en: 'Bosnia and Herzegovina',
   },
   mapsQuery: 'Svadbeni salon Kedar Mrkonjić Grad',
@@ -76,35 +79,35 @@ export type LocaleCopy = {
 
 export const copy: Record<Lang, LocaleCopy> = {
   sr: {
-    pageTitle: 'Milica & Dejan | Pozivnica',
-    heroSubtitle: 'vjenčaju se!',
-    heroNote: 'Istog dana slavimo i rođendan našeg sina Vukašina.',
-    saveCalendar: 'Sačuvaj u kalendar',
-    scrollHint: 'Skroluj',
-    inviteTitle: 'Pozivamo',
+    pageTitle: 'Милица & Дејан | Позивница',
+    heroSubtitle: 'вјенчају се!',
+    heroNote: 'Истог дана славимо и рођендан нашег сина Вукашина.',
+    saveCalendar: 'Сачувај у календар',
+    scrollHint: 'Скролуј',
+    inviteTitle: 'Позивамо',
     inviteBody:
-      'Naš dan želimo proslaviti uz one koje volimo, i uz rođendan našeg sina Vukašina. Vaše prisustvo nam puno znači.',
-    inviteGuest: { f: 'Draga', m: 'Dragi', u: '' },
-    countdownTitle: 'Do velikog dana',
-    countdownDoneTitle: 'Proslava',
-    countdownDone: 'Datum proslave je prošao.',
-    days: 'Dana',
-    hours: 'Sati',
-    minutes: 'Minuta',
-    seconds: 'Sekundi',
-    scheduleTitle: 'Raspored',
+      'Наш дан желимо прославити уз оне које волимо, и уз рођендан нашег сина Вукашина. Ваше присуство нам пуно значи.',
+    inviteGuest: { f: 'Драга', m: 'Драги', u: '' },
+    countdownTitle: 'До великог дана',
+    countdownDoneTitle: 'Прослава',
+    countdownDone: 'Датум прославе је прошао.',
+    days: 'Дана',
+    hours: 'Сати',
+    minutes: 'Минута',
+    seconds: 'Секунди',
+    scheduleTitle: 'Распоред',
     scheduleItems: [
       {
         time: '17:00',
-        title: 'Skup svatova',
-        detail: 'Svadbeni salon „Kedar“ — dobrodošli!',
+        title: 'Скуп сватова',
+        detail: 'Свадбени салон „Кедар“ — добродошли!',
       },
     ],
-    locationTitle: 'Lokacija',
+    locationTitle: 'Локација',
     mapsLink: 'Google Maps',
-    rsvpTitle: 'Potvrdite dolazak',
+    rsvpTitle: 'Потврдите долазак',
     rsvpBody: '',
-    footer: 'Milica & Dejan — 13. mart 2027',
+    footer: 'Милица & Дејан — 13. март 2027',
   },
   en: {
     pageTitle: 'Milica & Dejan | Invitation',
