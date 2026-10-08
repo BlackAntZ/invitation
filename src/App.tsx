@@ -152,9 +152,9 @@ function App() {
                 <p className="invite__body">{rsvp.deadline[lang]}</p>
               ) : null}
               {t.rsvpBody ? <p className="invite__body rsvp__body">{t.rsvpBody}</p> : null}
-              {rsvp.phones.length > 0 ? (
+              {rsvp.phones[lang].length > 0 ? (
                 <div className="rsvp__phones">
-                  {rsvp.phones.map((p) => (
+                  {rsvp.phones[lang].map((p) => (
                     <a key={p.href} href={p.href} className="rsvp__phone">
                       {p.label}
                     </a>

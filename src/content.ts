@@ -46,9 +46,12 @@ export const guestGenderOverrides: Record<string, 'f' | 'm' | 'u'> = {}
 
 /** Set `enabled: true` and fill fields when RSVP is ready */
 export const rsvp = {
-  enabled: false as boolean,
+  enabled: true,
   deadline: { sr: '', en: '' },
-  phones: [] as { label: string; href: string }[],
+  phones: {
+    sr: [{ label: 'Дејан: 066 866 375', href: 'tel:+38766866375' }],
+    en: [{ label: 'Dejan: 066 866 375', href: 'tel:+38766866375' }],
+  },
 }
 
 export type LocaleCopy = {
@@ -108,7 +111,7 @@ export const copy: Record<Lang, LocaleCopy> = {
     locationTitle: 'Локација',
     mapsLink: 'Google Maps',
     rsvpTitle: 'Потврдите долазак',
-    rsvpBody: '',
+    rsvpBody: 'Молимо да потврдите долазак до 01.03.2026.',
     footer: 'Милица & Дејан — 13. март 2027',
   },
   en: {
@@ -140,7 +143,7 @@ export const copy: Record<Lang, LocaleCopy> = {
     locationTitle: 'Location',
     mapsLink: 'Google Maps',
     rsvpTitle: 'RSVP',
-    rsvpBody: '',
+    rsvpBody: 'Please confirm your attendance by 1 March 2026.',
     footer: 'Milica & Dejan — 13 March 2027',
   },
 }
