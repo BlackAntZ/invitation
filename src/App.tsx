@@ -57,7 +57,10 @@ function App() {
         </section>
 
         <div className="band">
-        <section id="invite" className="section" aria-labelledby="invite-body">
+        <section id="invite" className="section" aria-labelledby="invite-title">
+          <h2 id="invite-title" className="section__heading">
+            {t.inviteTitle}
+          </h2>
           <GlassPanel className="section__panel section__panel--narrow">
             {guest.name ? (
               <p className="invite__guest">
