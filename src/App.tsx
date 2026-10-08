@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { Background } from './components/Background'
 import { GlassPanel } from './components/GlassPanel'
 import { LanguageSwitch } from './components/LanguageSwitch'
-import { copy, event, rsvp } from './content'
+import { copy, event, rsvp, unitLabel } from './content'
 import { useCountdown, pad2 } from './hooks/useCountdown'
 import { useLanguage } from './hooks/useLanguage'
 import { downloadIcsFile } from './utils/calendar'
@@ -90,7 +90,7 @@ function App() {
               ).map(([key, value, label]) => (
                 <GlassPanel key={key} className="countdown__cell">
                   <span className="countdown__value">{pad2(value)}</span>
-                  <span className="countdown__label">{label}</span>
+                  <span className="countdown__label">{unitLabel(lang, label, value)}</span>
                 </GlassPanel>
               ))}
             </div>

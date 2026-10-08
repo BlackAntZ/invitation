@@ -1,5 +1,17 @@
 export type Lang = 'sr' | 'en'
 
+/** one = 1, 21, 31… · few = 2–4, 22–24… · many = 0, 5–20, 11–14… */
+export type UnitForms = { one: string; few: string; many: string }
+
+export function unitLabel(lang: Lang, forms: UnitForms, n: number): string {
+  if (lang === 'en') return n === 1 ? forms.one : forms.many
+  const mod10 = n % 10
+  const mod100 = n % 100
+  if (mod10 === 1 && mod100 !== 11) return forms.one
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return forms.few
+  return forms.many
+}
+
 export const STORAGE_LANG_KEY = 'wedding-invite-lang'
 
 export const event = {
@@ -73,10 +85,10 @@ export type LocaleCopy = {
   countdownTitle: string
   countdownDoneTitle: string
   countdownDone: string
-  days: string
-  hours: string
-  minutes: string
-  seconds: string
+  days: UnitForms
+  hours: UnitForms
+  minutes: UnitForms
+  seconds: UnitForms
   scheduleTitle: string
   scheduleItems: { time: string; title: string; detail: string }[]
   locationTitle: string
@@ -100,10 +112,10 @@ export const copy: Record<Lang, LocaleCopy> = {
     countdownTitle: 'До великог дана',
     countdownDoneTitle: 'Прослава',
     countdownDone: 'Датум прославе је прошао.',
-    days: 'Дана',
-    hours: 'Сати',
-    minutes: 'Минута',
-    seconds: 'Секунди',
+    days: { one: 'Дан', few: 'Дана', many: 'Дана' },
+    hours: { one: 'Сат', few: 'Сата', many: 'Сати' },
+    minutes: { one: 'Минут', few: 'Минута', many: 'Минута' },
+    seconds: { one: 'Секунда', few: 'Секунде', many: 'Секунди' },
     scheduleTitle: 'Распоред',
     scheduleItems: [
       {
@@ -131,10 +143,10 @@ export const copy: Record<Lang, LocaleCopy> = {
     countdownTitle: 'Counting down',
     countdownDoneTitle: 'The celebration',
     countdownDone: 'The celebration date has passed.',
-    days: 'Days',
-    hours: 'Hours',
-    minutes: 'Minutes',
-    seconds: 'Seconds',
+    days: { one: 'Day', few: 'Days', many: 'Days' },
+    hours: { one: 'Hour', few: 'Hours', many: 'Hours' },
+    minutes: { one: 'Minute', few: 'Minutes', many: 'Minutes' },
+    seconds: { one: 'Second', few: 'Seconds', many: 'Seconds' },
     scheduleTitle: 'Schedule',
     scheduleItems: [
       {

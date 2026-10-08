@@ -23,8 +23,8 @@ export function GlassPanel({ children, className = '', as: Tag = 'div' }: Props)
   const onLeave = () => {
     const el = ref.current
     if (!el) return
-    el.style.setProperty('--gx', '50%')
-    el.style.setProperty('--gy', '30%')
+    el.style.setProperty('--gx', '22%')
+    el.style.setProperty('--gy', '0%')
   }
 
   return (

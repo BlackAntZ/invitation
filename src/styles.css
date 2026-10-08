@@ -8,13 +8,21 @@
   --text-soft: rgba(26, 46, 40, 0.72);
   --accent: #2d4a42;
   --accent-deep: #1e332c;
-  --glass-bg: rgba(255, 255, 255, 0.42);
-  --glass-border: rgba(255, 255, 255, 0.65);
-  --glass-shadow: 0 8px 32px rgba(30, 50, 44, 0.12), 0 2px 8px rgba(255, 255, 255, 0.4) inset;
+  --glass-bg: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.62) 0%,
+    rgba(255, 255, 255, 0.28) 42%,
+    rgba(244, 248, 245, 0.34) 100%
+  );
+  --glass-shadow:
+    0 18px 40px rgba(30, 46, 40, 0.12),
+    0 2px 8px rgba(30, 46, 40, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.28);
   --radius-lg: 28px;
   --radius-pill: 999px;
-  --gx: 50%;
-  --gy: 30%;
+  --gx: 22%;
+  --gy: 0%;
 }
 
 *,
@@ -92,28 +100,58 @@ html[lang='sr'] .hero__names {
 /* Glass */
 .glass {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   border-radius: var(--radius-lg);
   background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  border: 1px solid rgba(255, 255, 255, 0.38);
   box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(24px) saturate(1.35);
-  -webkit-backdrop-filter: blur(24px) saturate(1.35);
-  --gx: 50%;
-  --gy: 30%;
+  backdrop-filter: blur(28px) saturate(1.8);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  --gx: 22%;
+  --gy: 0%;
+}
+
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.28) 28%,
+    rgba(255, 255, 255, 0.06) 52%,
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
 }
 
 .glass__shine {
   pointer-events: none;
   position: absolute;
   inset: 0;
+  z-index: 0;
   border-radius: inherit;
-  background: radial-gradient(
-    600px circle at var(--gx) var(--gy),
-    rgba(255, 255, 255, 0.55),
-    transparent 42%
-  );
-  opacity: 0.85;
+  background:
+    radial-gradient(90% 70% at var(--gx) var(--gy), rgba(255, 255, 255, 0.72), transparent 46%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.05) 32%, transparent 48%),
+    linear-gradient(180deg, transparent 72%, rgba(255, 255, 255, 0.16) 100%);
+}
+
+.glass > :not(.glass__shine) {
+  position: relative;
+  z-index: 1;
 }
 
 .glass--compact {
