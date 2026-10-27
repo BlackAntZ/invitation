@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { Background } from './components/Background'
 import { GlassPanel } from './components/GlassPanel'
 import { LanguageSwitch } from './components/LanguageSwitch'
+import { MusicToggle } from './components/MusicToggle'
 import { copy, event, rsvp, unitLabel } from './content'
 import { useCountdown, pad2 } from './hooks/useCountdown'
 import { useLanguage } from './hooks/useLanguage'
@@ -32,6 +33,7 @@ function App() {
   return (
     <>
       <Background />
+      <MusicToggle playLabel={t.musicPlay} pauseLabel={t.musicPause} />
       <LanguageSwitch lang={lang} onChange={setLang} />
 
       <main className="page">

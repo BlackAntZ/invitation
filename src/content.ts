@@ -79,6 +79,8 @@ export type LocaleCopy = {
   heroBirthday: string
   saveCalendar: string
   scrollHint: string
+  musicPlay: string
+  musicPause: string
   inviteTitle: string
   inviteBody: string
   /** Address before the guest name. Empty means the name stands alone. */
@@ -107,6 +109,8 @@ export const copy: Record<Lang, LocaleCopy> = {
     heroBirthday: 'слави рођендан',
     saveCalendar: 'Сачувај у календар',
     scrollHint: 'Скролуј',
+    musicPlay: 'Пусти музику',
+    musicPause: 'Заустави музику',
     inviteTitle: 'Позивница',
     inviteBody:
       'Наш дан желимо прославити уз оне које волимо. Ваше присуство нам пуно значи.',
@@ -139,6 +143,8 @@ export const copy: Record<Lang, LocaleCopy> = {
     heroBirthday: 'is celebrating a birthday',
     saveCalendar: 'Save the date',
     scrollHint: 'Scroll',
+    musicPlay: 'Play music',
+    musicPause: 'Pause music',
     inviteTitle: 'Invitation',
     inviteBody:
       'We want to celebrate our day with the people we love. Your presence means a lot to us.',

@@ -220,6 +220,33 @@ html[lang='sr'] .hero__names {
   background: rgba(26, 46, 40, 0.15);
 }
 
+.music-toggle {
+  position: fixed;
+  top: max(1.25rem, env(safe-area-inset-top));
+  left: max(1.25rem, env(safe-area-inset-left));
+  z-index: 100;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: var(--radius-pill);
+  color: var(--accent-deep);
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.music-toggle.is-on {
+  color: var(--accent-deep);
+}
+
+@media (max-width: 1320px) {
+  .music-toggle {
+    left: max(1rem, env(safe-area-inset-left));
+  }
+}
+
 /* Layout */
 .page {
   position: relative;
