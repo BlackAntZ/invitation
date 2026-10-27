@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const SRC = `${import.meta.env.BASE_URL}deus-vult.mp3`
+const SRC = `${import.meta.env.BASE_URL}bah-yo.mp3`
 
 type Props = {
   playLabel: string
@@ -22,12 +22,20 @@ export function MusicToggle({ playLabel, pauseLabel }: Props) {
 
   useEffect(() => {
     if (!ask) return
+    const locked = document.querySelectorAll('.page, .lang-switch')
+    locked.forEach((node) => node.setAttribute('inert', ''))
     yesRef.current?.focus()
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setAsk(false)
+      if (event.key === 'Tab' || event.key === 'Escape') {
+        event.preventDefault()
+        yesRef.current?.focus()
+      }
     }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    return () => {
+      locked.forEach((node) => node.removeAttribute('inert'))
+      window.removeEventListener('keydown', onKey)
+    }
   }, [ask])
 
   const play = () => {
@@ -36,8 +44,6 @@ export function MusicToggle({ playLabel, pauseLabel }: Props) {
     audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false))
     setAsk(false)
   }
-
-  const dismiss = () => setAsk(false)
 
   const toggle = () => {
     const audio = audioRef.current
@@ -53,34 +59,30 @@ export function MusicToggle({ playLabel, pauseLabel }: Props) {
   return (
     <>
       <audio ref={audioRef} src={SRC} preload="auto" loop />
-      <button
-        type="button"
-        className={playing ? 'music-toggle glass is-on' : 'music-toggle glass'}
-        onClick={toggle}
-        aria-pressed={playing}
-        aria-label={playing ? pauseLabel : playLabel}
-      >
-        <SoundIcon muted={!playing} />
-      </button>
-      {ask ? (
-        <div className="music-ask" role="presentation" onClick={dismiss}>
-          <div
-            className="music-ask__card glass"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="music-ask-title"
-            onClick={(event) => event.stopPropagation()}
+      {!ask ? (
+        <button
+          type="button"
+          className={playing ? 'music-toggle glass is-on' : 'music-toggle glass'}
+          onClick={toggle}
+          aria-pressed={playing}
+          aria-label={playing ? pauseLabel : playLabel}
+        >
+          <SoundIcon muted={!playing} />
+        </button>
+      ) : (
+        <div className="music-ask">
+          <button
+            ref={yesRef}
+            type="button"
+            className="music-ask__play glass"
+            onClick={play}
+            aria-label={playLabel}
           >
             <div className="glass__shine" aria-hidden />
-            <p id="music-ask-title" className="music-ask__label">
-              {playLabel}
-            </p>
-            <button ref={yesRef} type="button" className="music-ask__play" onClick={play} aria-label={playLabel}>
-              <SoundIcon muted={false} />
-            </button>
-          </div>
+            <SoundIcon muted={false} />
+          </button>
         </div>
-      ) : null}
+      )}
     </>
   )
 }
