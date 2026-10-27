@@ -81,6 +81,10 @@ export type LocaleCopy = {
   scrollHint: string
   musicPlay: string
   musicPause: string
+  musicAskTitle: string
+  musicAskBody: string
+  musicAskYes: string
+  musicAskNo: string
   inviteTitle: string
   inviteBody: string
   /** Address before the guest name. Empty means the name stands alone. */
@@ -111,6 +115,10 @@ export const copy: Record<Lang, LocaleCopy> = {
     scrollHint: 'Скролуј',
     musicPlay: 'Пусти музику',
     musicPause: 'Заустави музику',
+    musicAskTitle: 'Музика',
+    musicAskBody: 'Желите ли да пустимо музику док гледате позивницу?',
+    musicAskYes: 'Пусти',
+    musicAskNo: 'Не сада',
     inviteTitle: 'Позивница',
     inviteBody:
       'Наш дан желимо прославити уз оне које волимо. Ваше присуство нам пуно значи.',
@@ -145,6 +153,10 @@ export const copy: Record<Lang, LocaleCopy> = {
     scrollHint: 'Scroll',
     musicPlay: 'Play music',
     musicPause: 'Pause music',
+    musicAskTitle: 'Music',
+    musicAskBody: 'Would you like music while you read the invitation?',
+    musicAskYes: 'Play',
+    musicAskNo: 'Not now',
     inviteTitle: 'Invitation',
     inviteBody:
       'We want to celebrate our day with the people we love. Your presence means a lot to us.',

@@ -5,44 +5,50 @@ const SRC = `${import.meta.env.BASE_URL}deus-vult.mp3`
 type Props = {
   playLabel: string
   pauseLabel: string
+  askTitle: string
+  askBody: string
+  askYes: string
+  askNo: string
 }
 
-export function MusicToggle({ playLabel, pauseLabel }: Props) {
+export function MusicToggle({ playLabel, pauseLabel, askTitle, askBody, askYes, askNo }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null)
-  const pausedByGuest = useRef(false)
+  const yesRef = useRef<HTMLButtonElement>(null)
   const [playing, setPlaying] = useState(false)
+  const [ask, setAsk] = useState(true)
 
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
     audio.loop = true
     audio.volume = 0.45
-
-    const start = () => {
-      if (pausedByGuest.current) return
-      audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false))
-    }
-
-    start()
-
-    const onGesture = (event: Event) => {
-      const target = event.target
-      if (target instanceof Element && target.closest('.music-toggle')) return
-      start()
-    }
-
-    window.addEventListener('pointerdown', onGesture)
-    return () => window.removeEventListener('pointerdown', onGesture)
   }, [])
+
+  useEffect(() => {
+    if (!ask) return
+    yesRef.current?.focus()
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setAsk(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [ask])
+
+  const play = () => {
+    const audio = audioRef.current
+    if (!audio) return
+    audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false))
+    setAsk(false)
+  }
+
+  const dismiss = () => setAsk(false)
 
   const toggle = () => {
     const audio = audioRef.current
     if (!audio) return
     if (audio.paused) {
-      pausedByGuest.current = false
       audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false))
     } else {
-      pausedByGuest.current = true
       audio.pause()
       setPlaying(false)
     }
@@ -60,6 +66,34 @@ export function MusicToggle({ playLabel, pauseLabel }: Props) {
       >
         <SoundIcon muted={!playing} />
       </button>
+      {ask ? (
+        <div className="music-ask" role="presentation" onClick={dismiss}>
+          <div
+            className="music-ask__card glass"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="music-ask-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="glass__shine" aria-hidden />
+            <span className="music-ask__icon" aria-hidden>
+              <SoundIcon muted={false} />
+            </span>
+            <h2 id="music-ask-title" className="music-ask__title script">
+              {askTitle}
+            </h2>
+            <p className="music-ask__body">{askBody}</p>
+            <div className="music-ask__actions">
+              <button ref={yesRef} type="button" className="btn music-ask__yes" onClick={play}>
+                {askYes}
+              </button>
+              <button type="button" className="btn music-ask__no" onClick={dismiss}>
+                {askNo}
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </>
   )
 }
