@@ -5,13 +5,9 @@ const SRC = `${import.meta.env.BASE_URL}deus-vult.mp3`
 type Props = {
   playLabel: string
   pauseLabel: string
-  askTitle: string
-  askBody: string
-  askYes: string
-  askNo: string
 }
 
-export function MusicToggle({ playLabel, pauseLabel, askTitle, askBody, askYes, askNo }: Props) {
+export function MusicToggle({ playLabel, pauseLabel }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null)
   const yesRef = useRef<HTMLButtonElement>(null)
   const [playing, setPlaying] = useState(false)
@@ -76,21 +72,12 @@ export function MusicToggle({ playLabel, pauseLabel, askTitle, askBody, askYes, 
             onClick={(event) => event.stopPropagation()}
           >
             <div className="glass__shine" aria-hidden />
-            <span className="music-ask__icon" aria-hidden>
+            <p id="music-ask-title" className="music-ask__label">
+              {playLabel}
+            </p>
+            <button ref={yesRef} type="button" className="music-ask__play" onClick={play} aria-label={playLabel}>
               <SoundIcon muted={false} />
-            </span>
-            <h2 id="music-ask-title" className="music-ask__title script">
-              {askTitle}
-            </h2>
-            <p className="music-ask__body">{askBody}</p>
-            <div className="music-ask__actions">
-              <button ref={yesRef} type="button" className="btn music-ask__yes" onClick={play}>
-                {askYes}
-              </button>
-              <button type="button" className="btn music-ask__no" onClick={dismiss}>
-                {askNo}
-              </button>
-            </div>
+            </button>
           </div>
         </div>
       ) : null}

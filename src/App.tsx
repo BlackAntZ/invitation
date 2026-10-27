@@ -33,14 +33,7 @@ function App() {
   return (
     <>
       <Background />
-      <MusicToggle
-        playLabel={t.musicPlay}
-        pauseLabel={t.musicPause}
-        askTitle={t.musicAskTitle}
-        askBody={t.musicAskBody}
-        askYes={t.musicAskYes}
-        askNo={t.musicAskNo}
-      />
+      <MusicToggle playLabel={t.musicPlay} pauseLabel={t.musicPause} />
       <LanguageSwitch lang={lang} onChange={setLang} />
 
       <main className="page">
