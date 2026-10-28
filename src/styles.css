@@ -351,6 +351,29 @@ body:has(.music-ask) {
   margin-right: 0.7rem;
 }
 
+.baby-cameo[data-mood='firm'] .baby-cameo__bubble {
+  font-weight: 700;
+}
+
+.baby-cameo[data-mood='annoyed'] .baby-cameo__bubble,
+.baby-cameo[data-mood='fuming'] .baby-cameo__bubble {
+  background: #fff6ee;
+  font-weight: 750;
+}
+
+.baby-cameo[data-mood='fuming'] .baby-cameo__bubble {
+  font-size: 1.08rem;
+}
+
+.baby-cameo[data-mood='annoyed'] img {
+  animation: baby-fuss 0.42s ease-in-out 3;
+}
+
+.baby-cameo[data-mood='fuming'] img {
+  animation: baby-fuss 0.24s ease-in-out 7;
+  filter: drop-shadow(0 14px 18px rgba(30, 46, 40, 0.28)) contrast(1.06) saturate(1.12);
+}
+
 @keyframes baby-pop {
   from {
     opacity: 0;
@@ -362,8 +385,22 @@ body:has(.music-ask) {
   }
 }
 
+@keyframes baby-fuss {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-2.5deg);
+  }
+  75% {
+    transform: rotate(2.5deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .baby-cameo {
+  .baby-cameo,
+  .baby-cameo img {
     animation: none;
   }
 }
