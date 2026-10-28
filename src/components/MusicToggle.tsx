@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import baby from '../assets/baby.webp'
 
 const SRC = `${import.meta.env.BASE_URL}beba-sera-2.mp3`
-/** Start of each "beba séra" in the track. The baby stays up for HOLD seconds. */
-const CUES = [30.7, 48.35, 67.75, 121.65]
+/** Each "beba séra", two seconds after the word starts, so the baby comes in with the name. */
+const CUES = [32.7, 50.35, 69.75, 123.65]
 const HOLD = 5.6
 const LINES = [
   'Ko si ti?',
