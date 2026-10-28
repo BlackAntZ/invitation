@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
+import baby from '../assets/baby.webp'
 
-const SRC = `${import.meta.env.BASE_URL}bah-yo.mp3`
+const SRC = `${import.meta.env.BASE_URL}beba-sera.mp3`
+/** First "beba séra" in the track. Later mentions are around 18s and 27s. */
+const BEBA_AT = 9.85
+const BEBA_UNTIL = 16.6
 
 type Props = {
   playLabel: string
@@ -12,12 +16,23 @@ export function MusicToggle({ playLabel, pauseLabel }: Props) {
   const yesRef = useRef<HTMLButtonElement>(null)
   const [playing, setPlaying] = useState(false)
   const [ask, setAsk] = useState(true)
+  const [cameo, setCameo] = useState(false)
 
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
     audio.loop = true
     audio.volume = 0.45
+    const onTime = () => {
+      const t = audio.currentTime
+      setCameo(t >= BEBA_AT && t < BEBA_UNTIL)
+    }
+    audio.addEventListener('timeupdate', onTime)
+    audio.addEventListener('seeked', onTime)
+    return () => {
+      audio.removeEventListener('timeupdate', onTime)
+      audio.removeEventListener('seeked', onTime)
+    }
   }, [])
 
   useEffect(() => {
@@ -59,6 +74,16 @@ export function MusicToggle({ playLabel, pauseLabel }: Props) {
   return (
     <>
       <audio ref={audioRef} src={SRC} preload="auto" loop />
+      {cameo ? (
+        <div className="baby-cameo" role="status">
+          <p className="baby-cameo__bubble">Ko remeti moj mir?!</p>
+          <div className="baby-cameo__dots" aria-hidden>
+            <span className="baby-cameo__dot baby-cameo__dot--lg" />
+            <span className="baby-cameo__dot baby-cameo__dot--sm" />
+          </div>
+          <img src={baby} alt="" />
+        </div>
+      ) : null}
       {!ask ? (
         <button
           type="button"

@@ -287,6 +287,87 @@ body:has(.music-ask) {
   transform: scale(0.98);
 }
 
+.baby-cameo {
+  position: fixed;
+  z-index: 90;
+  right: max(0.4rem, env(safe-area-inset-right));
+  bottom: max(0.15rem, env(safe-area-inset-bottom));
+  width: min(250px, 52vw);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+  animation: baby-pop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.baby-cameo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 14px 18px rgba(30, 46, 40, 0.28));
+}
+
+.baby-cameo__bubble {
+  width: max-content;
+  max-width: min(16rem, 78vw);
+  margin: 0 0.15rem 0.15rem;
+  padding: 0.7rem 1rem;
+  border-radius: 1.35rem;
+  background: rgba(255, 252, 248, 0.97);
+  color: var(--accent-deep);
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.3;
+  text-align: center;
+  box-shadow:
+    0 12px 28px rgba(30, 46, 40, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.baby-cameo__dots {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.28rem;
+  margin: 0 22% 0.2rem 0;
+}
+
+.baby-cameo__dot {
+  display: block;
+  border-radius: 50%;
+  background: #f7f3ec;
+  border: 1.5px solid rgba(30, 46, 40, 0.28);
+  box-shadow: 0 3px 8px rgba(30, 46, 40, 0.18);
+}
+
+.baby-cameo__dot--lg {
+  width: 18px;
+  height: 18px;
+}
+
+.baby-cameo__dot--sm {
+  width: 10px;
+  height: 10px;
+  margin-right: 0.7rem;
+}
+
+@keyframes baby-pop {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .baby-cameo {
+    animation: none;
+  }
+}
+
 /* Layout */
 .page {
   position: relative;
