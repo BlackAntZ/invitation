@@ -166,7 +166,7 @@ export const copy: Record<Lang, LocaleCopy> = {
     ],
     locationTitle: 'Location',
     mapsLink: 'Google Maps',
-    rsvpTitle: 'RSVP',
+    rsvpTitle: 'Confirm your attendance',
     rsvpBody: 'Please confirm your attendance by 1 March 2027.',
     footer: 'Milica & Dejan — 13 March 2027',
   },
