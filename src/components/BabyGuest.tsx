@@ -34,18 +34,27 @@ export function BabyGuest({ gender }: Props) {
     const node = rootRef.current
     if (!node) return
     let timer = 0
+    let seen = false
+    const arm = () => {
+      if (timer || !seen || document.querySelector('.music-ask')) return
+      timer = window.setTimeout(() => {
+        if (!pokedRef.current) setText(DARE)
+      }, 5000)
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting || timer) return
-        timer = window.setTimeout(() => {
-          if (!pokedRef.current) setText(DARE)
-        }, 5000)
+        if (!entry.isIntersecting) return
+        seen = true
+        arm()
       },
       { threshold: 0.5 },
     )
     observer.observe(node)
+    const gate = new MutationObserver(arm)
+    gate.observe(document.body, { childList: true, subtree: true })
     return () => {
       observer.disconnect()
+      gate.disconnect()
       window.clearTimeout(timer)
     }
   }, [])
