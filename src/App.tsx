@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { Background } from './components/Background'
 import { GlassPanel } from './components/GlassPanel'
 import { LanguageSwitch } from './components/LanguageSwitch'
+import { BabyGuest } from './components/BabyGuest'
 import { MusicToggle } from './components/MusicToggle'
 import { copy, event, rsvp, unitLabel } from './content'
 import { useCountdown, pad2 } from './hooks/useCountdown'
@@ -178,6 +179,7 @@ function App() {
         <footer className="footer">
           <p>{t.footer}</p>
         </footer>
+        <BabyGuest gender={guest.gender} />
       </main>
     </>
   )

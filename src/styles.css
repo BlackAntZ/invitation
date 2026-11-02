@@ -287,30 +287,38 @@ body:has(.music-ask) {
   transform: scale(0.98);
 }
 
-.baby-cameo {
-  position: fixed;
-  z-index: 90;
-  right: max(0.4rem, env(safe-area-inset-right));
-  bottom: max(0.15rem, env(safe-area-inset-bottom));
-  width: min(250px, 52vw);
+.baby-end {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  pointer-events: none;
-  animation: baby-pop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-bottom: 0.5rem;
 }
 
-.baby-cameo img {
+.baby-end__poke {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  width: min(280px, 72vw);
+}
+
+.baby-end__poke img {
   width: 100%;
   height: auto;
   display: block;
   filter: drop-shadow(0 14px 18px rgba(30, 46, 40, 0.28));
 }
 
+.baby-end__poke:active img {
+  transform: scale(0.98);
+}
+
 .baby-cameo__bubble {
   width: max-content;
-  max-width: min(16rem, 78vw);
-  margin: 0 0.15rem 0.15rem;
+  max-width: min(18rem, 86vw);
+  margin: 0 0 0.15rem;
   padding: 0.7rem 1rem;
   border-radius: 1.35rem;
   background: rgba(255, 252, 248, 0.97);
@@ -327,9 +335,9 @@ body:has(.music-ask) {
 .baby-cameo__dots {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   gap: 0.28rem;
-  margin: 0 22% 0.2rem 0;
+  margin: 0 0 0.2rem;
 }
 
 .baby-cameo__dot {
@@ -348,28 +356,28 @@ body:has(.music-ask) {
 .baby-cameo__dot--sm {
   width: 10px;
   height: 10px;
-  margin-right: 0.7rem;
+  margin-left: 0.85rem;
 }
 
-.baby-cameo[data-mood='firm'] .baby-cameo__bubble {
+.baby-cameo__bubble[data-mood='firm'] {
   font-weight: 700;
 }
 
-.baby-cameo[data-mood='annoyed'] .baby-cameo__bubble,
-.baby-cameo[data-mood='fuming'] .baby-cameo__bubble {
+.baby-cameo__bubble[data-mood='annoyed'],
+.baby-cameo__bubble[data-mood='fuming'] {
   background: #fff6ee;
   font-weight: 750;
 }
 
-.baby-cameo[data-mood='fuming'] .baby-cameo__bubble {
+.baby-cameo__bubble[data-mood='fuming'] {
   font-size: 1.08rem;
 }
 
-.baby-cameo[data-mood='annoyed'] img {
+.baby-end img[data-mood='annoyed'] {
   animation: baby-fuss 0.42s ease-in-out 3;
 }
 
-.baby-cameo[data-mood='fuming'] img {
+.baby-end img[data-mood='fuming'] {
   animation: baby-fuss 0.24s ease-in-out 7;
   filter: drop-shadow(0 14px 18px rgba(30, 46, 40, 0.28)) contrast(1.06) saturate(1.12);
 }
@@ -399,8 +407,7 @@ body:has(.music-ask) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .baby-cameo,
-  .baby-cameo img {
+  .baby-end img {
     animation: none;
   }
 }

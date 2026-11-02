@@ -1,25 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import baby from '../assets/baby.webp'
 
 const SRC = `${import.meta.env.BASE_URL}beba-sera-2.mp3`
-/** Each "beba séra", two seconds after the word starts, so the baby comes in with the name. */
-const CUES = [32.7, 50.35, 69.75, 123.65]
-const HOLD = 5.6
-const LINES = [
-  'Ko si ti?',
-  'Mene zoveš?',
-  'Ovdje sam!',
-  'Ko remeti moj mir!?',
-  'Opet ja?',
-  'Dosta više!',
-  'Prestani!',
-  'Ne mogu da pijem!',
-  'Ma ko ste vi?!',
-  'Spustite to!',
-  'Hoću mir!',
-  'E, sad je dosta!',
-  'DOSTA!',
-]
 
 type Props = {
   playLabel: string
@@ -31,43 +12,12 @@ export function MusicToggle({ playLabel, pauseLabel }: Props) {
   const yesRef = useRef<HTMLButtonElement>(null)
   const [playing, setPlaying] = useState(false)
   const [ask, setAsk] = useState(true)
-  const [cameo, setCameo] = useState<{ text: string; level: number } | null>(null)
-  const lineRef = useRef(0)
-  const lastTimeRef = useRef(0)
-  const firedRef = useRef<boolean[]>(CUES.map(() => false))
-  const visibleRef = useRef(false)
 
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
     audio.loop = true
     audio.volume = 0.45
-    const onTime = () => {
-      const t = audio.currentTime
-      if (t + 0.4 < lastTimeRef.current) firedRef.current = CUES.map(() => false)
-      lastTimeRef.current = t
-      const active = CUES.findIndex((start) => t >= start && t < start + HOLD)
-      if (active !== -1) {
-        if (!firedRef.current[active]) {
-          firedRef.current[active] = true
-          const level = lineRef.current
-          lineRef.current += 1
-          visibleRef.current = true
-          setCameo({ text: LINES[Math.min(level, LINES.length - 1)], level })
-        }
-        return
-      }
-      if (visibleRef.current) {
-        visibleRef.current = false
-        setCameo(null)
-      }
-    }
-    audio.addEventListener('timeupdate', onTime)
-    audio.addEventListener('seeked', onTime)
-    return () => {
-      audio.removeEventListener('timeupdate', onTime)
-      audio.removeEventListener('seeked', onTime)
-    }
   }, [])
 
   useEffect(() => {
@@ -109,21 +59,6 @@ export function MusicToggle({ playLabel, pauseLabel }: Props) {
   return (
     <>
       <audio ref={audioRef} src={SRC} preload="auto" loop />
-      {cameo ? (
-        <div
-          key={cameo.level}
-          className="baby-cameo"
-          data-mood={moodFor(cameo.level)}
-          role="status"
-        >
-          <p className="baby-cameo__bubble">{cameo.text}</p>
-          <div className="baby-cameo__dots" aria-hidden>
-            <span className="baby-cameo__dot baby-cameo__dot--lg" />
-            <span className="baby-cameo__dot baby-cameo__dot--sm" />
-          </div>
-          <img src={baby} alt="" />
-        </div>
-      ) : null}
       {!ask ? (
         <button
           type="button"
@@ -150,13 +85,6 @@ export function MusicToggle({ playLabel, pauseLabel }: Props) {
       )}
     </>
   )
-}
-
-function moodFor(level: number) {
-  if (level >= 7) return 'fuming'
-  if (level >= 3) return 'annoyed'
-  if (level >= 2) return 'firm'
-  return 'curious'
 }
 
 function SoundIcon({ muted }: { muted: boolean }) {
