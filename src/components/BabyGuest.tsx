@@ -22,39 +22,31 @@ type Props = {
 }
 
 export function BabyGuest({ gender }: Props) {
-  const rootRef = useRef<HTMLElement>(null)
   const pokedRef = useRef(false)
   const pokesRef = useRef(0)
   const female = gender === 'f'
   const greeting = female ? 'Тето, хоћеш ли доћи?' : 'Чико, хоћеш ли доћи?'
   const [text, setText] = useState(greeting)
   const [pokes, setPokes] = useState(0)
+  const [shown, setShown] = useState(false)
 
   useEffect(() => {
-    const node = rootRef.current
-    if (!node) return
+    const numbers = document.querySelector('.rsvp__phones')
+    if (!numbers) return
     let timer = 0
-    let seen = false
-    const arm = () => {
-      if (timer || !seen || document.querySelector('.music-ask')) return
-      timer = window.setTimeout(() => {
-        if (!pokedRef.current) setText(DARE)
-      }, 5000)
-    }
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return
-        seen = true
-        arm()
+        if (!entry.isIntersecting || timer) return
+        setShown(true)
+        timer = window.setTimeout(() => {
+          if (!pokedRef.current) setText(DARE)
+        }, 5000)
       },
-      { threshold: 0.5 },
+      { threshold: 0.4 },
     )
-    observer.observe(node)
-    const gate = new MutationObserver(arm)
-    gate.observe(document.body, { childList: true, subtree: true })
+    observer.observe(numbers)
     return () => {
       observer.disconnect()
-      gate.disconnect()
       window.clearTimeout(timer)
     }
   }, [])
@@ -71,8 +63,10 @@ export function BabyGuest({ gender }: Props) {
     setText(POKES[Math.min(next - 2, POKES.length - 1)])
   }
 
+  if (!shown) return null
+
   return (
-    <section ref={rootRef} className="baby-end" aria-label={text}>
+    <section className="baby-end" aria-label={text}>
       <p id="baby-thought" className="baby-cameo__bubble" data-mood={moodFor(pokes)}>
         {text}
       </p>

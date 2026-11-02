@@ -299,6 +299,7 @@ body:has(.music-ask) {
   margin: 0;
   padding: 0;
   pointer-events: none;
+  animation: baby-pop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .baby-end__poke {
@@ -426,6 +427,7 @@ body:has(.music-ask) {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .baby-end,
   .baby-end img {
     animation: none;
   }
