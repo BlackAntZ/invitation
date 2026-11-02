@@ -1,27 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
 
-const SRC = `${import.meta.env.BASE_URL}beba-sera-2.mp3`
-
 type Props = {
   playLabel: string
   pauseLabel: string
+  src?: string
 }
 
-export function MusicToggle({ playLabel, pauseLabel }: Props) {
+export function MusicToggle({ playLabel, pauseLabel, src }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null)
   const yesRef = useRef<HTMLButtonElement>(null)
   const [playing, setPlaying] = useState(false)
-  const [ask, setAsk] = useState(true)
+  const [ask, setAsk] = useState(Boolean(src))
 
   useEffect(() => {
     const audio = audioRef.current
-    if (!audio) return
+    if (!audio || !src) return
     audio.loop = true
     audio.volume = 0.45
-  }, [])
+  }, [src])
 
   useEffect(() => {
-    if (!ask) return
+    if (!src || !ask) return
     const locked = document.querySelectorAll('.page, .lang-switch')
     locked.forEach((node) => node.setAttribute('inert', ''))
     yesRef.current?.focus()
@@ -36,7 +35,7 @@ export function MusicToggle({ playLabel, pauseLabel }: Props) {
       locked.forEach((node) => node.removeAttribute('inert'))
       window.removeEventListener('keydown', onKey)
     }
-  }, [ask])
+  }, [ask, src])
 
   const play = () => {
     const audio = audioRef.current
@@ -56,9 +55,11 @@ export function MusicToggle({ playLabel, pauseLabel }: Props) {
     }
   }
 
+  if (!src) return null
+
   return (
     <>
-      <audio ref={audioRef} src={SRC} preload="auto" loop />
+      <audio ref={audioRef} src={src} preload="auto" loop />
       {!ask ? (
         <button
           type="button"

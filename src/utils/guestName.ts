@@ -7,7 +7,7 @@ export type Guest = {
   gender: GuestGender
 }
 
-const RESERVED = new Set(['p', 'pol', 'gender', 'guest', 'g', 'name'])
+const RESERVED = new Set(['p', 'pol', 'gender', 'guest', 'g', 'name', 'v'])
 
 /** Common male given names in the region that end in -a. */
 const MALE_ENDING_A = new Set([
@@ -27,6 +27,15 @@ const MALE_ENDING_A = new Set([
 
 /** Given names used for more than one gender. */
 const UNISEX = new Set(['vanja', 'sasa', 'minja', 'nika'])
+
+/** Older, quieter invitation. `v=s` on the guest link. */
+export function isMatureInvite(search?: string): boolean {
+  const query = search ?? (typeof window === 'undefined' ? '' : window.location.search)
+  const value = new URLSearchParams(query).get('v')
+  if (!value) return false
+  const v = value.toLocaleLowerCase('sr')
+  return v === 's' || v === 'stariji' || v === 'older'
+}
 
 export function getGuestFromUrl(): Guest {
   if (typeof window === 'undefined') return { name: null, gender: 'u' }

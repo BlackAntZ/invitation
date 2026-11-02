@@ -8,7 +8,7 @@ import { copy, event, rsvp, unitLabel } from './content'
 import { useCountdown, pad2 } from './hooks/useCountdown'
 import { useLanguage } from './hooks/useLanguage'
 import { downloadIcsFile } from './utils/calendar'
-import { getGuestFromUrl } from './utils/guestName'
+import { getGuestFromUrl, isMatureInvite } from './utils/guestName'
 import { mapsUrl } from './utils/maps'
 import sprig from './assets/sprig.webp'
 import monogramEn from './assets/monogram-en.webp'
@@ -20,6 +20,7 @@ function App() {
   const t = copy[lang]
   const countdown = useCountdown()
   const guest = useMemo(() => getGuestFromUrl(), [])
+  const mature = useMemo(() => isMatureInvite(), [])
   const guestPrefix = t.inviteGuest[guest.gender]
 
   useEffect(() => {
@@ -34,7 +35,11 @@ function App() {
   return (
     <>
       <Background />
-      <MusicToggle playLabel={t.musicPlay} pauseLabel={t.musicPause} />
+      <MusicToggle
+        playLabel={t.musicPlay}
+        pauseLabel={t.musicPause}
+        src={mature ? undefined : `${import.meta.env.BASE_URL}beba-sera-2.mp3`}
+      />
       <LanguageSwitch lang={lang} onChange={setLang} />
 
       <main className="page">
@@ -179,7 +184,7 @@ function App() {
         <footer className="footer">
           <p>{t.footer}</p>
         </footer>
-        <BabyGuest gender={guest.gender} />
+        <BabyGuest gender={guest.gender} playful={!mature} />
       </main>
     </>
   )

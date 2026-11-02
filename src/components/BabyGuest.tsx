@@ -19,9 +19,11 @@ const POKES = [
 
 type Props = {
   gender: GuestGender
+  /** Younger invitation: the baby dares the guest to poke him. */
+  playful?: boolean
 }
 
-export function BabyGuest({ gender }: Props) {
+export function BabyGuest({ gender, playful = true }: Props) {
   const pokedRef = useRef(false)
   const pokesRef = useRef(0)
   const female = gender === 'f'
@@ -38,6 +40,7 @@ export function BabyGuest({ gender }: Props) {
       ([entry]) => {
         if (!entry.isIntersecting || timer) return
         setShown(true)
+        if (!playful) return
         timer = window.setTimeout(() => {
           if (!pokedRef.current) setText(DARE)
         }, 5000)
@@ -49,7 +52,7 @@ export function BabyGuest({ gender }: Props) {
       observer.disconnect()
       window.clearTimeout(timer)
     }
-  }, [])
+  }, [playful])
 
   const poke = () => {
     pokedRef.current = true
@@ -74,9 +77,13 @@ export function BabyGuest({ gender }: Props) {
         <span className="baby-cameo__dot baby-cameo__dot--lg" />
         <span className="baby-cameo__dot baby-cameo__dot--sm" />
       </div>
-      <button type="button" className="baby-end__poke" onClick={poke} aria-labelledby="baby-thought">
-        <img key={pokes} src={baby} alt="" data-mood={moodFor(pokes)} />
-      </button>
+      {playful ? (
+        <button type="button" className="baby-end__poke" onClick={poke} aria-labelledby="baby-thought">
+          <img key={pokes} src={baby} alt="" data-mood={moodFor(pokes)} />
+        </button>
+      ) : (
+        <img className="baby-end__still" src={baby} alt="" />
+      )}
     </section>
   )
 }
