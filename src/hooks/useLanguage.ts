@@ -12,8 +12,29 @@ function readStoredLang(): Lang {
   return 'sr'
 }
 
+export function langFromSearch(search: string): Lang | null {
+  const value = new URLSearchParams(search).get('lang')
+  if (!value) return null
+  const v = value.toLocaleLowerCase('en')
+  if (v === 'en' || v === 'english') return 'en'
+  if (v === 'sr' || v === 'srp' || v === 'srpski') return 'sr'
+  return null
+}
+
+function readInitialLang(): Lang {
+  if (typeof window === 'undefined') return 'sr'
+  const fromUrl = langFromSearch(window.location.search)
+  if (!fromUrl) return readStoredLang()
+  try {
+    localStorage.setItem(STORAGE_LANG_KEY, fromUrl)
+  } catch {
+    /* ignore */
+  }
+  return fromUrl
+}
+
 export function useLanguage(): [Lang, (lang: Lang) => void] {
-  const [lang, setLangState] = useState<Lang>(() => readStoredLang())
+  const [lang, setLangState] = useState<Lang>(() => readInitialLang())
 
   const setLang = useCallback((next: Lang) => {
     setLangState(next)
@@ -22,6 +43,9 @@ export function useLanguage(): [Lang, (lang: Lang) => void] {
     } catch {
       /* ignore */
     }
+    const url = new URL(window.location.href)
+    url.searchParams.set('lang', next)
+    window.history.replaceState(null, '', url)
   }, [])
 
   useEffect(() => {

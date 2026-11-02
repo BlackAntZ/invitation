@@ -38,7 +38,7 @@ function App() {
       <MusicToggle
         playLabel={t.musicPlay}
         pauseLabel={t.musicPause}
-        src={mature ? undefined : `${import.meta.env.BASE_URL}beba-sera-2.mp3`}
+        src={`${import.meta.env.BASE_URL}${mature ? 'elegant-reception.mp3' : 'beba-sera-2.mp3'}`}
       />
       <LanguageSwitch lang={lang} onChange={setLang} />
 
@@ -184,7 +184,7 @@ function App() {
         <footer className="footer">
           <p>{t.footer}</p>
         </footer>
-        <BabyGuest gender={guest.gender} playful={!mature} />
+        <BabyGuest gender={guest.gender} lang={lang} playful={!mature} />
       </main>
     </>
   )

@@ -7,7 +7,7 @@ export type Guest = {
   gender: GuestGender
 }
 
-const RESERVED = new Set(['p', 'pol', 'gender', 'guest', 'g', 'name', 'v'])
+const RESERVED = new Set(['p', 'pol', 'gender', 'guest', 'g', 'name', 'v', 'lang'])
 
 /** Common male given names in the region that end in -a. */
 const MALE_ENDING_A = new Set([

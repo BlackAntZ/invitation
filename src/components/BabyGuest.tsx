@@ -1,36 +1,74 @@
 import { useEffect, useRef, useState } from 'react'
 import baby from '../assets/baby.webp'
+import type { Lang } from '../content'
 import type { GuestGender } from '../utils/guestName'
 
-const DARE = 'Боцни ме ако смијеш'
+const LINES = {
+  sr: {
+    uncle: 'Чико, хоћеш ли доћи?',
+    aunt: 'Тето, хоћеш ли доћи?',
+    dare: 'Боцни ме ако смијеш',
+    fattyM: 'Не боцкај ме дебели!',
+    fattyF: 'Не боцкај ме дебела!',
+    pokes: [
+      'Не дирај Гигија',
+      'Истуће те моја мама',
+      'Мама!!',
+      'Хоћеш да те уједем за прст?!',
+      'Види ми зубе!',
+      'Мама, овај ме боцка!',
+      'Ја ћу да кажем!',
+      'Гиги је опасан!',
+      'Сад ћу да заплачем!',
+      'ДОСТА!',
+    ],
+  },
+  en: {
+    uncle: 'Uncle, will you come?',
+    aunt: 'Auntie, will you come?',
+    dare: 'Poke me if you dare',
+    fattyM: "Don't poke me, fatty!",
+    fattyF: "Don't poke me, fatty!",
+    pokes: [
+      "Don't touch Gigi",
+      'My mum will smack you',
+      'Mum!!',
+      'Want me to bite your finger?!',
+      'Look at my teeth!',
+      'Mum, this one is poking me!',
+      "I'll tell on you!",
+      'Gigi is dangerous!',
+      "I'm going to cry!",
+      'ENOUGH!',
+    ],
+  },
+} as const
 
-const POKES = [
-  'Не дирај Гигија',
-  'Истуће те моја мама',
-  'Мама!!',
-  'Хоћеш да те уједем за прст?!',
-  'Види ми зубе!',
-  'Мама, овај ме боцка!',
-  'Ја ћу да кажем!',
-  'Гиги је опасан!',
-  'Сад ћу да заплачем!',
-  'ДОСТА!',
-]
+type Beat = 'greet' | 'dare' | number
 
 type Props = {
   gender: GuestGender
+  lang: Lang
   /** Younger invitation: the baby dares the guest to poke him. */
   playful?: boolean
 }
 
-export function BabyGuest({ gender, playful = true }: Props) {
+function thought(lang: Lang, female: boolean, beat: Beat): string {
+  const lines = LINES[lang]
+  if (beat === 'greet') return female ? lines.aunt : lines.uncle
+  if (beat === 'dare') return lines.dare
+  if (beat === 1) return female ? lines.fattyF : lines.fattyM
+  return lines.pokes[Math.min(beat - 2, lines.pokes.length - 1)]
+}
+
+export function BabyGuest({ gender, lang, playful = true }: Props) {
   const pokedRef = useRef(false)
   const pokesRef = useRef(0)
   const female = gender === 'f'
-  const greeting = female ? 'Тето, хоћеш ли доћи?' : 'Чико, хоћеш ли доћи?'
-  const [text, setText] = useState(greeting)
+  const [beat, setBeat] = useState<Beat>('greet')
   const [pokes, setPokes] = useState(0)
   const [shown, setShown] = useState(false)
+  const text = thought(lang, female, beat)
 
   useEffect(() => {
     const numbers = document.querySelector('.rsvp__phones')
@@ -42,7 +80,7 @@ export function BabyGuest({ gender, playful = true }: Props) {
         setShown(true)
         if (!playful) return
         timer = window.setTimeout(() => {
-          if (!pokedRef.current) setText(DARE)
+          if (!pokedRef.current) setBeat('dare')
         }, 5000)
       },
       { threshold: 0.4 },
@@ -59,11 +97,7 @@ export function BabyGuest({ gender, playful = true }: Props) {
     const next = pokesRef.current + 1
     pokesRef.current = next
     setPokes(next)
-    if (next === 1) {
-      setText(female ? 'Не боцкај ме дебела!' : 'Не боцкај ме дебели!')
-      return
-    }
-    setText(POKES[Math.min(next - 2, POKES.length - 1)])
+    setBeat(next)
   }
 
   if (!shown) return null
